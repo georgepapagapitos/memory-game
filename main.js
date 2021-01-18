@@ -66,7 +66,7 @@ grid.addEventListener('click', function(event) {
   // declare variable to target our clicked item
   let clicked = event.target;
   // do not allow the grid section to be selected
-  if(clicked.nodeName === 'SECTION' || clicked === previousTarget || clicked.parentNode.classList.contains('match') || clicked.parentNode.classList('selected')) {
+  if(clicked.nodeName === 'SECTION' || clicked === previousTarget || clicked.parentNode.classList.contains('match') || clicked.parentNode.classList.contains('selected')) {
     return;
   }
   // add 'selected' class if the count is less than 2
