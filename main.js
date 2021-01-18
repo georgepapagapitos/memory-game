@@ -46,11 +46,10 @@ for(i = 0; i < gameGrid.length; i++) {
 
 let firstGuess = '';
 let secondGuess = '';
-
 // set clickedCount to 0
 let clickedCount = 0;
-
 let previousTarget = null;
+let delay = 1200;
 
 // add match CSS
 let match = function() {
@@ -59,7 +58,20 @@ let match = function() {
   for(let i = 0; i < selected.length; i++) {
     selected[i].classList.add('match');
   }
-}
+};
+
+// reset guesses after two attempts
+let resetGuesses = function() {
+  firstGuess = '';
+  secondGuess = '';
+  clickedCount = 0;
+  previousTarget = null;
+
+  let selected = document.querySelectorAll('.selected');
+  for(let i = 0; i < selected.length; i++) {
+    selected[i].classList.remove('selected');
+  }
+};
  
 // add event listener to grid
 grid.addEventListener('click', function(event) {
@@ -86,7 +98,10 @@ grid.addEventListener('click', function(event) {
       // and firstGuess matches secondGuess
       if(firstGuess === secondGuess) {
         // run match funtion
-        match();
+        setTimeout(match, delay);
+        setTimeout(resetGuesses, delay);
+      } else {
+        setTimeout(resetGuesses, delay);
       }
     }
     previousTarget = clicked;
