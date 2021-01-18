@@ -1,16 +1,16 @@
-var cardsArray = [
-  {'name': 'CSS', 'img': 'https://github.com/robgmerrill/img/blob/master/css3-logo.png?raw=true'},
-  {'name': 'HTML', 'img': 'https://github.com/robgmerrill/img/blob/master/html5-logo.png?raw=true'},
-  {'name': 'jQuery', 'img': 'https://github.com/robgmerrill/img/blob/master/jquery-logo.png?raw=true'},
-  {'name': 'JS', 'img': 'https://github.com/robgmerrill/img/blob/master/js-logo.png?raw=true'},
-  {'name': 'Node', 'img': 'https://github.com/robgmerrill/img/blob/master/nodejs-logo.png?raw=true'},
-  {'name': 'Photo Shop', 'img': 'https://github.com/robgmerrill/img/blob/master/photoshop-logo.png?raw=true'},
-  {'name': 'PHP', 'img': 'https://github.com/robgmerrill/img/blob/master/php-logo_1.png?raw=true'},
-  {'name': 'Python', 'img': 'https://github.com/robgmerrill/img/blob/master/python-logo.png?raw=true'},
-  {'name': 'Ruby', 'img': 'https://github.com/robgmerrill/img/blob/master/rails-logo.png?raw=true'},
-  {'name': 'Sass', 'img': 'https://github.com/robgmerrill/img/blob/master/sass-logo.png?raw=true'},
-  {'name': 'Sublime', 'img': 'https://github.com/robgmerrill/img/blob/master/sublime-logo.png?raw=true'},
-  {'name': 'Wordpress', 'img': 'https://github.com/robgmerrill/img/blob/master/wordpress-logo.png?raw=true'}
+let cardsArray = [
+  {'name': '1up', 'img': './img/1up.png'},
+  {'name': 'blueshell', 'img': './img/blueshell.png'},
+  {'name': 'bobomb', 'img': './img/bobomb.png'},
+  {'name': 'bulletbill', 'img': './img/bulletbill.png'},
+  {'name': 'coin', 'img': './img/coin.png'},
+  {'name': 'goomba', 'img': './img/goomba.png'},
+  {'name': 'luigi', 'img': './img/luigi.png'},
+  {'name': 'mario', 'img': './img/mario.png'},
+  {'name': 'mushroom', 'img': './img/mario.png'},
+  {'name': 'peach', 'img': './img/peach.png'},
+  {'name': 'star', 'img': './img/star.png'},
+  {'name': 'thwomp', 'img': './img/thwomp.png'},
 ];
 
 // duplicate cardsArray to create a match for each card
@@ -38,10 +38,20 @@ for(i = 0; i < gameGrid.length; i++) {
   card.classList.add('card');
   // set the data-name attribute of the div to cardsArray[i].name
   card.dataset.name = gameGrid[i].name;
-  // apply the background image of the div to the cardsArray image
-  card.style.backgroundImage = `url(${gameGrid[i].img})`;
-  // append the div to the grid section
+
+  // create front of card
+  let front = document.createElement('div');
+  front.classList.add('front');
+
+  //create back of card
+  let back = document.createElement('div');
+  back.classList.add('back');
+  back.style.backgroundImage = `url(${gameGrid[i].img})`
+  
+  //append card to grid
   grid.appendChild(card);
+  card.append(front);
+  card.append(back);
 }
 
 let firstGuess = '';
@@ -86,12 +96,12 @@ grid.addEventListener('click', function(event) {
     clickedCount++
     if(clickedCount === 1) {
       // assign first guess
-      firstGuess = clicked.dataset.name;
-      clicked.classList.add('selected');
+      firstGuess = clicked.parentNode.dataset.name;
+      clicked.parentNode.classList.add('selected');
     } else {
       // assign second guess
-      secondGuess = clicked.dataset.name;
-      clicked.classList.add('selected');
+      secondGuess = clicked.parentNode.dataset.name;
+      clicked.parentNode.classList.add('selected');
     }
     // if both guesses are not empty
     if(firstGuess !== '' && secondGuess !== '') {
